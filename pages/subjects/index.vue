@@ -7,9 +7,24 @@
           <v-btn flat
             ><v-icon size="large" color="info" icon="mdi-trash-can"></v-icon
           ></v-btn> -->
-          <v-btn icon="mdi-plus" color="primary" class="mx-0" variant="text"></v-btn>
-          <v-btn icon="mdi-trash-can" color="primary" class="mx-0" variant="text"></v-btn>
-          <v-btn icon="mdi-filter" color="primary" class="mx-0" variant="text"></v-btn>
+          <v-btn
+            icon="mdi-plus"
+            color="primary"
+            class="mx-0"
+            variant="text"
+          ></v-btn>
+          <v-btn
+            icon="mdi-trash-can"
+            color="primary"
+            class="mx-0"
+            variant="text"
+          ></v-btn>
+          <v-btn
+            icon="mdi-filter"
+            color="primary"
+            class="mx-0"
+            variant="text"
+          ></v-btn>
         </v-col>
         <v-col>
           <v-text-field
@@ -31,8 +46,8 @@
         :headers="headers"
         :items="items"
         rows-per-page-message="Отображать по"
-        @click-row="showRow"
         theme-color="#1d90ff"
+        @click-row="showRow"
       >
         <template #item-operation="item">
           <div class="operation-wrapper">
@@ -47,7 +62,9 @@
       </Vue3EasyDataTable>
     </v-col>
   </v-row>
-  <CreateOrEditDialog :isShow="true"/>
+  <teleport to="body">
+    <CreateOrEditDialog :is-show="true" />
+  </teleport>
 </template>
 <script setup lang="ts">
 import Vue3EasyDataTable from "vue3-easy-data-table";

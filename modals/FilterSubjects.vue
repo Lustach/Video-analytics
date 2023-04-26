@@ -3,7 +3,12 @@
     <v-dialog v-model="dialog" width="auto" persistent>
       <v-card class="pa-8 pb-2">
         <v-row justify="end">
-          <v-btn icon="mdi-close" color="black" class="mx-0 mb-4" variant="text"></v-btn>
+          <v-btn
+            icon="mdi-close"
+            color="black"
+            class="mx-0 mb-4"
+            variant="text"
+          ></v-btn>
         </v-row>
         <v-form v-model="valid">
           <v-container fluid class="form_container">
@@ -90,10 +95,6 @@
         </v-form>
       </v-card>
     </v-dialog>
-    <v-dialog width="auto" v-model="deleteDialog">
-      <v-card> Удалить записи (<количество записей>) </v-card>
-    </v-dialog>
-    <v-dialog width="auto" v-model="deleteDialog"></v-dialog>
   </div>
 </template>
 <script setup lang="ts">

@@ -3,14 +3,16 @@ const route = useRoute();
 </script>
 <template>
   <v-app>
-  app
-  <!-- <v-btn class="mt-10">Hello Sass Changes</v-btn> -->
-  <v-app-bar>app Bar</v-app-bar>
-  <main class="view">
-    <NuxtPage />
-  </main>
-  <v-footer color="primary" elevation="4" style="max-height:64px;">footer</v-footer>
-</v-app>
+    app
+    <!-- <v-btn class="mt-10">Hello Sass Changes</v-btn> -->
+    <v-app-bar>app Bar</v-app-bar>
+    <main class="view">
+      <NuxtPage />
+    </main>
+    <v-footer color="primary" elevation="4" style="max-height: 64px"
+      >footer</v-footer
+    >
+  </v-app>
   <!-- <div class="d-flex align-center flex-column">
     <v-icon>mdi-home</v-icon>
     <v-card width="400">
@@ -47,7 +49,7 @@ const route = useRoute();
 </template>
 
 <style lang="scss">
-@use './settings';
+@use "./settings";
 .view {
   height: auto;
   flex: 1;
