@@ -14,13 +14,14 @@
             variant="text"
           ></v-btn>
           <v-btn
-            icon="mdi-trash-can"
+            icon="mdi-filter"
             color="primary"
             class="mx-0"
             variant="text"
           ></v-btn>
           <v-btn
-            icon="mdi-filter"
+            v-show="itemsSelected.length > 1"
+            icon="mdi-trash-can"
             color="primary"
             class="mx-0"
             variant="text"
@@ -57,13 +58,32 @@
               flat
               @click="editItem(item)"
             />
+            <v-btn
+              icon="mdi-trash-can"
+              color="primary"
+              class="mx-0"
+              variant="text"
+              @click="
+                items.splice(
+                  items.findIndex((e) => e.id === item.id),
+                  1
+                )
+              "
+            ></v-btn>
           </div>
         </template>
       </Vue3EasyDataTable>
     </v-col>
   </v-row>
   <teleport to="body">
-    <CreateOrEditDialog :is-show="true" />
+    <CreateOrEditDialog v-if="showModalCreateOrEditDialog" />
+  </teleport>
+  <teleport to="body">
+    <ModalConfirmDelete
+      v-if="showModalConfirmDelete"
+      @confirm="handleConfirmDelete"
+      @reject="handleRejectDelete"
+    />
   </teleport>
 </template>
 <script setup lang="ts">
@@ -71,8 +91,17 @@ import Vue3EasyDataTable from "vue3-easy-data-table";
 import "vue3-easy-data-table/dist/style.css";
 import type { Header, Item, ClickRowArgument } from "vue3-easy-data-table";
 import CreateOrEditDialog from "@/modals/CreateOrEditSubject.vue";
+import ModalConfirmDelete from "@/modals/ModalConfirmDelete.vue";
 
-const itemsSelected = reactive([]);
+const showModalConfirmDelete = ref(false);
+const showModalCreateOrEditDialog = ref(false);
+const handleConfirmDelete = () => {
+  showModalConfirmDelete.value = false;
+};
+const handleRejectDelete = () => {
+  showModalConfirmDelete.value = false;
+};
+const itemsSelected = ref<Item[]>([]);
 const headers: Header[] = reactive([
   { text: "Фото", value: "id", sortable: true },
   { text: "Фамилия", value: "surname", sortable: true },
@@ -101,175 +130,175 @@ const items: Item[] = reactive([
     // isSelected: true,
   },
   {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    operation: ["delete", "change"],
-    // isSelected: true,
-  },
-  {
-    id: "123",
-    surname: 178,
-    name: 77,
-    fathername: 20,
-    sex: "male",
-    birth_date: "DD/MM/YYYY",
-    add_date: "DD/MM/YYYY",
-    change_date: "DD/MM/YYYY",
-    archived: true,
-    // isSelected: true,
-  },
-  {
     id: "1234",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1235",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1236",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1237",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1238",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1239",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "1230",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12310",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12311",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12312",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12313",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12314",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    operation: ["delete", "change"],
+    // isSelected: true,
+  },
+  {
+    id: "12315",
+    surname: 178,
+    name: 77,
+    fathername: 20,
+    sex: "male",
+    birth_date: "DD/MM/YYYY",
+    add_date: "DD/MM/YYYY",
+    change_date: "DD/MM/YYYY",
+    archived: true,
+    // isSelected: true,
+  },
+  {
+    id: "123416",
     surname: 178,
     name: 77,
     fathername: 20,
@@ -292,3 +321,7 @@ const editItem = (item: Item) => {
   //   isEditing.value = true;
 };
 </script>
+<style lang="scss" scoped>
+.table {
+}
+</style>

@@ -80,28 +80,7 @@
         </v-form>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="confirmDeleteDialog" width="auto" persistent>
-      <v-card class="pa-8 pb-2 pt-4">
-        <v-row justify="end">
-          <v-btn
-            icon="mdi-close"
-            color="black"
-            class="mx-0 mb-4 mt-0"
-            variant="text"
-          ></v-btn>
-        </v-row>
-        <h3>Удалить записи количество записей</h3>
-        <v-card-actions>
-          <v-row justify="end">
-            <v-btn color="primary" @click="confirmDeleteDialog = false"
-              >Отмена</v-btn
-            >
-            <v-btn color="primary">Подтвердить</v-btn>
-          </v-row>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog v-model="deleteSuccessDialog" width="auto"></v-dialog>
+    <!-- <v-dialog v-model="deleteSuccessDialog" width="auto"></v-dialog> -->
   </div>
 </template>
 <script setup lang="ts">

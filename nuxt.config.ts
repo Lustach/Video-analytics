@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     "@mdi/font/css/materialdesignicons.min.css",
   ],
   build: {
-    transpile: ["vuetify"],
+    transpile: ["vuetify", "class-validator"],
   },
   hooks: {
     "vite:extendConfig": (config) => {
@@ -18,6 +18,11 @@ export default defineNuxtConfig({
           styles: { configFile: resolve("./settings.scss") },
         })
       );
+    },
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: ["class-validator"],
     },
   },
 });
