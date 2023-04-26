@@ -17,7 +17,7 @@ module.exports = {
     // "plugin:vue/vue3-essential",
   ],
   rules: {
-    "max-len": ["error", { code: 130 }],
+    "max-len": ["error", { code: 150 }],
     "no-prototype-builtins": "off",
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
