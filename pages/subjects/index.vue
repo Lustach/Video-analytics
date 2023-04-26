@@ -282,7 +282,7 @@ const items: Item[] = reactive([
   },
 ]);
 const showRow = (item: ClickRowArgument) => {
-  console.log(item, "showRow");
+  console.log(item, "showRoww");
 };
 const deleteItem = (item: Item) => {
   console.log(item);
