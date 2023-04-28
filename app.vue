@@ -5,7 +5,10 @@ const route = useRoute();
   <v-app>
     app
     <!-- <v-btn class="mt-10">Hello Sass Changes</v-btn> -->
-    <v-app-bar>app Bar</v-app-bar>
+    <v-app-bar
+      >app Bar
+      <nuxt-link to="/subjects_find">Поиск субъектов</nuxt-link></v-app-bar
+    >
     <main class="view">
       <NuxtPage />
     </main>

@@ -13,10 +13,10 @@ import security from "@/assets/icons/security.vue";
         <!-- <img /> -->
         Субъекты
       </nuxt-link>
-      <div class="col card">
+      <nuxt-link to="/subjects_find" class="col card">
         <eye></eye>
         Поиск субъектов
-      </div>
+      </nuxt-link>
     </div>
     <div class="row">
       <div class="col card disabled" title="Временно не доступно">

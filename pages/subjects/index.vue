@@ -50,25 +50,27 @@
         theme-color="#1d90ff"
         @click-row="showRow"
       >
+        <template #item-archived="{ archived }">
+          <v-checkbox
+            class="table_checkbox"
+            size="small"
+            :value="archived"
+          ></v-checkbox
+        ></template>
         <template #item-operation="item">
           <div class="operation-wrapper">
             <v-btn
               size="x-small"
               icon="mdi-square-edit-outline"
               flat
-              @click="editItem(item)"
+              @click="showModalEdit(item)"
             />
             <v-btn
               icon="mdi-trash-can"
               color="primary"
               class="mx-0"
               variant="text"
-              @click="
-                items.splice(
-                  items.findIndex((e) => e.id === item.id),
-                  1
-                )
-              "
+              @click="showModalDelete(item)"
             ></v-btn>
           </div>
         </template>
@@ -76,11 +78,15 @@
     </v-col>
   </v-row>
   <teleport to="body">
-    <CreateOrEditDialog v-if="showModalCreateOrEditDialog" />
+    <CreateOrEditDialog
+      v-if="isModalCreateOrEditDialog"
+      :selected-item="selectedItem"
+      @close="closeCreateOrEditDialog"
+    />
   </teleport>
   <teleport to="body">
     <ModalConfirmDelete
-      v-if="showModalConfirmDelete"
+      v-if="isModalConfirmDelete"
       @confirm="handleConfirmDelete"
       @reject="handleRejectDelete"
     />
@@ -93,14 +99,33 @@ import type { Header, Item, ClickRowArgument } from "vue3-easy-data-table";
 import CreateOrEditDialog from "@/modals/CreateOrEditSubject.vue";
 import ModalConfirmDelete from "@/modals/ModalConfirmDelete.vue";
 
-const showModalConfirmDelete = ref(false);
-const showModalCreateOrEditDialog = ref(false);
+const isModalConfirmDelete = ref(false);
+const isModalCreateOrEditDialog = ref(false);
+const closeCreateOrEditDialog = () => {
+  isModalCreateOrEditDialog.value = false;
+};
 const handleConfirmDelete = () => {
-  showModalConfirmDelete.value = false;
+  fnDeleteItem();
+  isModalConfirmDelete.value = false;
 };
 const handleRejectDelete = () => {
-  showModalConfirmDelete.value = false;
+  isModalConfirmDelete.value = false;
 };
+const showModalDelete = (item: Item) => {
+  isModalConfirmDelete.value = true;
+  selectedItem.value = item;
+};
+const showModalEdit = (item: Item) => {
+  isModalCreateOrEditDialog.value = true;
+  selectedItem.value = item;
+};
+const fnDeleteItem = () => {
+  items.splice(
+    items.findIndex((e: Item) => e.id === selectedItem.value?.id),
+    1
+  );
+};
+const selectedItem = ref<Item>();
 const itemsSelected = ref<Item[]>([]);
 const headers: Header[] = reactive([
   { text: "Фото", value: "id", sortable: true },
@@ -313,9 +338,6 @@ const items: Item[] = reactive([
 const showRow = (item: ClickRowArgument) => {
   console.log(item, "showRoww");
 };
-const deleteItem = (item: Item) => {
-  console.log(item);
-};
 const editItem = (item: Item) => {
   console.log(item);
   //   isEditing.value = true;
@@ -323,5 +345,11 @@ const editItem = (item: Item) => {
 </script>
 <style lang="scss" scoped>
 .table {
+  &_checkbox {
+    &:deep .v-input__details {
+      background: red !important;
+      display: none;
+    }
+  }
 }
 </style>
