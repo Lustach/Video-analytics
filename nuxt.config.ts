@@ -4,6 +4,9 @@ import { createResolver } from "@nuxt/kit";
 const { resolve } = createResolver(import.meta.url);
 
 export default defineNuxtConfig({
+  // alias: {
+  // "@": "/src",
+  // },
   css: [
     "vuetify/lib/styles/main.sass",
     "@mdi/font/css/materialdesignicons.min.css",

@@ -125,7 +125,7 @@ const fnDeleteItem = () => {
     1
   );
 };
-const selectedItem = ref<Item>();
+const selectedItem: Item = ref();
 const itemsSelected = ref<Item[]>([]);
 const headers: Header[] = reactive([
   { text: "Фото", value: "id", sortable: true },
